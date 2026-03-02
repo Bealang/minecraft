@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilong Tool Pro v5.0 - Ultimate Formatter</title>
-    
-    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/minecraftia" type="text/css"/>
+
+    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="wrapper">
@@ -25,7 +27,7 @@
                 </div>
                 <div>
                     <span class="section-label">Formats (l, o, n, m, k, r)</span>
-                    
+
                     <div class="toolbar">
                         <button class="btn" onclick="add('&l')" title="Bold"><b>B</b></button>
                         <button class="btn" onclick="add('&o')" title="Italic"><i>I</i></button>
@@ -34,9 +36,9 @@
                         <button class="btn" onclick="add('&k')" title="Magic">Magic</button>
                         <button class="btn btn-clr" onclick="add('&r')" title="Reset">Reset</button>
                     </div>
-                    
+
                     <span class="section-label">Extra Symbols</span>
-                    
+
                     <div class="toolbar">
                         <button class="btn" onclick="add('⚠')">⚠</button>
                         <button class="btn" onclick="add('»')">»</button>
@@ -54,7 +56,7 @@
             </div>
 
             <span class="section-label">Live Chat Preview</span>
-            
+
             <div class="preview-box">
                 <div id="preview"></div>
             </div>
@@ -62,14 +64,14 @@
             <button class="btn copy-main" onclick="copyText()">📋 COPY TO CLIPBOARD</button>
 
             <span class="section-label">Save Current as New Preset</span>
-            
+
             <div class="save-bar">
                 <input type="text" id="preset-name" placeholder="Preset name...">
                 <button class="btn btn-save" onclick="saveNew()">SAVE</button>
             </div>
 
             <span class="section-label">Your Saved Templates</span>
-            
+
             <div id="presets-list" class="presets-list"></div>
         </div>
     </div>
@@ -79,4 +81,5 @@
     <script src="app.js"></script>
 
 </body>
+
 </html>
