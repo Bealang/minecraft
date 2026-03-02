@@ -1,0 +1,299 @@
+:root {
+    --gui-bg: #C6C6C6;
+    --gui-border-light: #FFFFFF;
+    --gui-border-dark: #555555;
+    --text-color: #404040;
+    --wood-bg: #6B4E2E;
+    --wood-border: #362411;
+    --mc-shadow: 2px 2px 0px #3f3f3f;
+}
+
+body {
+    font-family: 'Minecraftia', sans-serif;
+    background-color: #241911;
+    background-image: repeating-linear-gradient(45deg, #241911 25%, #2e2117 25%, #2e2117 50%, #241911 50%, #241911 75%, #2e2117 75%, #2e2117 100%);
+    background-size: 32px 32px;
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    image-rendering: pixelated;
+    -webkit-font-smoothing: none;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 900px;
+    background: var(--gui-bg);
+    border: 4px solid #000;
+    box-shadow: 0 15px 0 rgba(0,0,0,0.4);
+    padding: 4px;
+    position: relative;
+}
+
+.wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 4px solid var(--gui-border-light);
+    border-left: 4px solid var(--gui-border-light);
+    border-right: 4px solid var(--gui-border-dark);
+    border-bottom: 4px solid var(--gui-border-dark);
+    pointer-events: none;
+}
+
+.inner-content {
+    padding: 25px;
+    border: 2px solid #000;
+}
+
+header {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    text-shadow: 2px 2px 0px #fff;
+    text-transform: uppercase;
+}
+
+textarea,
+input[type="text"] {
+    width: 100%;
+    background: #000;
+    color: #ffffff;
+    text-shadow: var(--mc-shadow);
+    border: 2px solid #A0A0A0;
+    border-top-color: #555;
+    border-left-color: #555;
+    border-bottom-color: #fff;
+    border-right-color: #fff;
+    padding: 12px;
+    font-family: 'Minecraftia', sans-serif;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 120px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.section-label {
+    font-size: 14px;
+    color: #404040;
+    margin: 15px 0 5px 0;
+    display: block;
+    text-transform: uppercase;
+}
+
+.btn {
+    background: var(--gui-bg);
+    border: 2px solid #000;
+    box-shadow: inset 2px 2px 0 var(--gui-border-light), inset -2px -2px 0 var(--gui-border-dark);
+    color: #404040;
+    font-family: 'Minecraftia', sans-serif;
+    font-size: 13px;
+    padding: 8px 12px;
+    cursor: pointer;
+    position: relative;
+}
+
+.btn:active {
+    box-shadow: inset 2px 2px 0 var(--gui-border-dark), inset -2px -2px 0 var(--gui-border-light);
+    transform: translateY(2px);
+}
+
+.btn:hover {
+    background: #dcdcdc;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 4px;
+    border: 2px solid #8B8B8B;
+    padding: 4px;
+    background: #8B8B8B;
+}
+
+.c-btn {
+    width: 100%;
+    height: 32px;
+    border: 2px solid #000;
+    cursor: pointer;
+}
+
+.c-btn:hover {
+    border-color: #fff;
+}
+
+.save-bar {
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+    height: 44px;
+}
+
+.save-bar input {
+    flex-grow: 1;
+    margin: 0;
+    border-right: none;
+    height: 100%;
+}
+
+.save-bar .btn-save {
+    height: 100%;
+    white-space: nowrap;
+    background: #e6c35c;
+    padding: 0 25px;
+}
+
+.copy-main {
+    width: 100%;
+    margin: 20px 0;
+    padding: 15px;
+    font-size: 18px;
+    background: #5da048;
+    color: #fff;
+    text-shadow: 2px 2px 0 #3e6033;
+}
+
+.btn-clr {
+    background: #be5858;
+    color: #fff;
+}
+
+.preview-box {
+    background: #000;
+    border: 2px solid #A0A0A0;
+    border-top-color: #555;
+    border-left-color: #555;
+    padding: 15px;
+    min-height: 60px;
+    margin-top: 5px;
+}
+
+#preview {
+    font-family: 'Minecraftia', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: #ffffff;
+    text-shadow: var(--mc-shadow);
+}
+
+.mc-bold {
+    font-weight: bold;
+}
+
+.mc-italic {
+    font-style: italic;
+}
+
+.mc-underline {
+    text-decoration: underline;
+}
+
+.mc-strike {
+    text-decoration: line-through;
+}
+
+.mc-magic {
+    animation: mc-magic-anim 0.1s infinite;
+}
+
+@keyframes mc-magic-anim {
+    0% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+        font-family: monospace;
+    }
+}
+
+.presets-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.preset-pill {
+    background: var(--wood-bg);
+    border: 2px solid var(--wood-border);
+    box-shadow: inset 2px 2px 0 #8b6842, inset -2px -2px 0 #362411;
+    display: flex;
+    position: relative;
+}
+
+.preset-load {
+    background: none;
+    border: none;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+    font-family: 'Minecraftia', sans-serif;
+    font-size: 12px;
+    padding: 10px;
+    flex-grow: 1;
+    text-align: left;
+    cursor: pointer;
+}
+
+.dots-btn {
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border-left: 2px solid var(--wood-border);
+}
+
+.menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 100;
+    background: var(--gui-bg);
+    border: 2px solid #000;
+    min-width: 150px;
+    display: none;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+}
+
+.menu button {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    border: none;
+    background: none;
+    font-family: 'Minecraftia', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #8b8b8b;
+}
+
+.menu button:hover {
+    background: #fff;
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 12px;
+    opacity: 0.6;
+    color: #fff;
+}

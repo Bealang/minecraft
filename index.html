@@ -6,335 +6,77 @@
     <title>Bilong Tool Pro v5.0 - Ultimate Formatter</title>
     
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/minecraftia" type="text/css"/>
-
-    <style>
-        :root {
-            --gui-bg: #C6C6C6;
-            --gui-border-light: #FFFFFF;
-            --gui-border-dark: #555555;
-            --text-color: #404040;
-            --wood-bg: #6B4E2E;
-            --wood-border: #362411;
-            --mc-shadow: 2px 2px 0px #3f3f3f;
-        }
-
-        body {
-            font-family: 'Minecraftia', sans-serif;
-            background-color: #241911;
-            background-image: repeating-linear-gradient(45deg, #241911 25%, #2e2117 25%, #2e2117 50%, #241911 50%, #241911 75%, #2e2117 75%, #2e2117 100%);
-            background-size: 32px 32px;
-            color: var(--text-color);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-            image-rendering: pixelated;
-            -webkit-font-smoothing: none;
-        }
-
-        .wrapper {
-            width: 100%;
-            max-width: 900px;
-            background: var(--gui-bg);
-            border: 4px solid #000;
-            box-shadow: 0 15px 0 rgba(0,0,0,0.4);
-            padding: 4px;
-            position: relative;
-        }
-
-        .wrapper::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            border-top: 4px solid var(--gui-border-light);
-            border-left: 4px solid var(--gui-border-light);
-            border-right: 4px solid var(--gui-border-dark);
-            border-bottom: 4px solid var(--gui-border-dark);
-            pointer-events: none;
-        }
-
-        .inner-content { padding: 25px; border: 2px solid #000; }
-
-        header { margin-bottom: 25px; text-align: center; }
-        header h1 { margin: 0; font-size: 26px; text-shadow: 2px 2px 0px #fff; text-transform: uppercase; }
-
-        textarea, input[type="text"] {
-            width: 100%; background: #000; color: #ffffff;
-            text-shadow: var(--mc-shadow); border: 2px solid #A0A0A0;
-            border-top-color: #555; border-left-color: #555;
-            border-bottom-color: #fff; border-right-color: #fff;
-            padding: 12px; font-family: 'Minecraftia', sans-serif;
-            font-size: 16px; outline: none; box-sizing: border-box;
-        }
-        
-        textarea { height: 120px; resize: none; margin-bottom: 10px; }
-
-        .section-label { font-size: 14px; color: #404040; margin: 15px 0 5px 0; display: block; text-transform: uppercase; }
-
-        /* Buttons Style */
-        .btn {
-            background: var(--gui-bg); border: 2px solid #000;
-            box-shadow: inset 2px 2px 0 var(--gui-border-light), inset -2px -2px 0 var(--gui-border-dark);
-            color: #404040; font-family: 'Minecraftia', sans-serif; font-size: 13px;
-            padding: 8px 12px; cursor: pointer; position: relative;
-        }
-        .btn:active { box-shadow: inset 2px 2px 0 var(--gui-border-dark), inset -2px -2px 0 var(--gui-border-light); transform: translateY(2px); }
-        .btn:hover { background: #dcdcdc; }
-
-        .toolbar { display: flex; flex-wrap: wrap; gap: 4px; }
-        
-        /* Color Grid */
-        .color-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; border: 2px solid #8B8B8B; padding: 4px; background: #8B8B8B; }
-        .c-btn { width: 100%; height: 32px; border: 2px solid #000; cursor: pointer; }
-        .c-btn:hover { border-color: #fff; }
-
-        /* Alignment fix for Save Bar */
-        .save-bar { 
-            display: flex; 
-            width: 100%; 
-            margin-top: 5px;
-            height: 44px; /* Fixed height for both elements */
-        }
-        .save-bar input { 
-            flex-grow: 1; 
-            margin: 0; 
-            border-right: none; 
-            height: 100%;
-        }
-        .save-bar .btn-save { 
-            height: 100%; 
-            white-space: nowrap; 
-            background: #e6c35c;
-            padding: 0 25px;
-        }
-
-        .copy-main { width: 100%; margin: 20px 0; padding: 15px; font-size: 18px; background: #5da048; color: #fff; text-shadow: 2px 2px 0 #3e6033; }
-        .btn-clr { background: #be5858; color: #fff; }
-
-        /* Preview Area */
-        .preview-box { background: #000; border: 2px solid #A0A0A0; border-top-color: #555; border-left-color: #555; padding: 15px; min-height: 60px; margin-top: 5px; }
-        #preview { font-family: 'Minecraftia', sans-serif; font-size: 16px; line-height: 1.6; white-space: pre-wrap; color: #ffffff; text-shadow: var(--mc-shadow); }
-
-        /* Formatting Classes */
-        .mc-bold { font-weight: bold; }
-        .mc-italic { font-style: italic; }
-        .mc-underline { text-decoration: underline; }
-        .mc-strike { text-decoration: line-through; }
-        .mc-magic { animation: mc-magic-anim 0.1s infinite; }
-        @keyframes mc-magic-anim {
-            0% { opacity: 0.8; }
-            100% { opacity: 1; font-family: monospace; }
-        }
-
-        /* Presets */
-        .presets-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
-        .preset-pill { background: var(--wood-bg); border: 2px solid var(--wood-border); box-shadow: inset 2px 2px 0 #8b6842, inset -2px -2px 0 #362411; display: flex; position: relative; }
-        .preset-load { background: none; border: none; color: #fff; text-shadow: 2px 2px 0 #000; font-family: 'Minecraftia', sans-serif; font-size: 12px; padding: 10px; flex-grow: 1; text-align: left; cursor: pointer; }
-        .dots-btn { color: #fff; padding: 10px; cursor: pointer; border-left: 2px solid var(--wood-border); }
-
-        .menu { position: absolute; top: 100%; right: 0; z-index: 100; background: var(--gui-bg); border: 2px solid #000; min-width: 150px; display: none; box-shadow: 4px 4px 0 rgba(0,0,0,0.5); }
-        .menu button { width: 100%; text-align: left; padding: 10px; border: none; background: none; font-family: 'Minecraftia', sans-serif; font-size: 12px; cursor: pointer; border-bottom: 1px solid #8b8b8b; }
-        .menu button:hover { background: #fff; }
-
-        footer { margin-top: 30px; font-size: 12px; opacity: 0.6; color: #fff; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="wrapper">
-    <div class="inner-content">
-        <header>
-            <h1>🛠 BILONG TOOL PRO v5 🛠</h1>
-        </header>
+    <div class="wrapper">
+        <div class="inner-content">
+            <header>
+                <h1>🛠 BILONG TOOL PRO v5 🛠</h1>
+            </header>
 
-        <textarea id="input" placeholder="Enter your message..."></textarea>
+            <textarea id="input" placeholder="Enter your message..."></textarea>
 
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
-            <div>
-                <span class="section-label">Colors (0-f)</span>
-                <div class="color-grid" id="color-grid"></div>
-            </div>
-            <div>
-                <span class="section-label">Formats (l, o, n, m, k, r)</span>
-                <div class="toolbar">
-                    <button class="btn" onclick="add('&l')" title="Bold"><b>B</b></button>
-                    <button class="btn" onclick="add('&o')" title="Italic"><i>I</i></button>
-                    <button class="btn" onclick="add('&n')" title="Underline"><u>U</u></button>
-                    <button class="btn" onclick="add('&m')" title="Strikethrough"><strike>S</strike></button>
-                    <button class="btn" onclick="add('&k')" title="Magic">Magic</button>
-                    <button class="btn btn-clr" onclick="add('&r')" title="Reset">Reset</button>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                <div>
+                    <span class="section-label">Colors (0-f)</span>
+                    <div class="color-grid" id="color-grid"></div>
                 </div>
-                <span class="section-label">Extra Symbols</span>
-                <div class="toolbar">
-                    <button class="btn" onclick="add('⚠')">⚠</button>
-                    <button class="btn" onclick="add('»')">»</button>
-                    <button class="btn" onclick="add('«')">«</button>
-                    <button class="btn" onclick="add('┃')">┃</button>
-                    <button class="btn" onclick="add('❤')">❤</button>
-                    <button class="btn" onclick="add('★')">★</button>
-                    <button class="btn" onclick="add('✦')">✦</button>
-                    <button class="btn" onclick="add('➔')">➔</button>
-                    <button class="btn" onclick="add('⬆')">⬆</button>
-                    <button class="btn" onclick="add('█')">█</button>
-                    <button class="btn" onclick="add('░')">░</button>
+                <div>
+                    <span class="section-label">Formats (l, o, n, m, k, r)</span>
+                    
+                    <div class="toolbar">
+                        <button class="btn" onclick="add('&l')" title="Bold"><b>B</b></button>
+                        <button class="btn" onclick="add('&o')" title="Italic"><i>I</i></button>
+                        <button class="btn" onclick="add('&n')" title="Underline"><u>U</u></button>
+                        <button class="btn" onclick="add('&m')" title="Strikethrough"><strike>S</strike></button>
+                        <button class="btn" onclick="add('&k')" title="Magic">Magic</button>
+                        <button class="btn btn-clr" onclick="add('&r')" title="Reset">Reset</button>
+                    </div>
+                    
+                    <span class="section-label">Extra Symbols</span>
+                    
+                    <div class="toolbar">
+                        <button class="btn" onclick="add('⚠')">⚠</button>
+                        <button class="btn" onclick="add('»')">»</button>
+                        <button class="btn" onclick="add('«')">«</button>
+                        <button class="btn" onclick="add('┃')">┃</button>
+                        <button class="btn" onclick="add('❤')">❤</button>
+                        <button class="btn" onclick="add('★')">★</button>
+                        <button class="btn" onclick="add('✦')">✦</button>
+                        <button class="btn" onclick="add('➔')">➔</button>
+                        <button class="btn" onclick="add('⬆')">⬆</button>
+                        <button class="btn" onclick="add('█')">█</button>
+                        <button class="btn" onclick="add('░')">░</button>
+                    </div>
                 </div>
             </div>
+
+            <span class="section-label">Live Chat Preview</span>
+            
+            <div class="preview-box">
+                <div id="preview"></div>
+            </div>
+
+            <button class="btn copy-main" onclick="copyText()">📋 COPY TO CLIPBOARD</button>
+
+            <span class="section-label">Save Current as New Preset</span>
+            
+            <div class="save-bar">
+                <input type="text" id="preset-name" placeholder="Preset name...">
+                <button class="btn btn-save" onclick="saveNew()">SAVE</button>
+            </div>
+
+            <span class="section-label">Your Saved Templates</span>
+            
+            <div id="presets-list" class="presets-list"></div>
         </div>
-
-        <span class="section-label">Live Chat Preview</span>
-        <div class="preview-box"><div id="preview"></div></div>
-
-        <button class="btn copy-main" onclick="copyText()">📋 COPY TO CLIPBOARD</button>
-
-        <span class="section-label">Save Current as New Preset</span>
-        <div class="save-bar">
-            <input type="text" id="preset-name" placeholder="Preset name...">
-            <button class="btn btn-save" onclick="saveNew()">SAVE</button>
-        </div>
-
-        <span class="section-label">Your Saved Templates</span>
-        <div id="presets-list" class="presets-list"></div>
     </div>
-</div>
 
-<footer>&copy; 2024 Bilong Tool | Authentic Minecraft Experience</footer>
+    <footer>&copy; 2024 Bilong Tool | Authentic Minecraft Experience</footer>
 
-<script>
-    const input = document.getElementById('input');
-    const preview = document.getElementById('preview');
-    const presetsList = document.getElementById('presets-list');
-    const mcColors = {'0':'#000','1':'#00A','2':'#0A0','3':'#0AA','4':'#A00','5':'#A0A','6':'#FA0','7':'#AAA','8':'#555','9':'#55F','a':'#5F5','b':'#5FF','c':'#F55','d':'#F5F','e':'#FF5','f':'#FFF'};
-
-    // Colors
-    const grid = document.getElementById('color-grid');
-    Object.keys(mcColors).forEach(c => {
-        const b = document.createElement('button');
-        b.className = 'c-btn';
-        b.style.background = mcColors[c];
-        b.onclick = () => add('&' + c);
-        grid.appendChild(b);
-    });
-
-    function add(code) {
-        const s = input.selectionStart;
-        input.value = input.value.substring(0, s) + code + input.value.substring(input.selectionEnd);
-        input.focus();
-        input.setSelectionRange(s + code.length, s + code.length);
-        update();
-    }
-
-    function update() {
-        let html = "";
-        let style = { color: '#ffffff', bold: false, italic: false, underline: false, strike: false, magic: false };
-        
-        // Split by ampersand, but only if followed by valid MC code
-        const parts = input.value.split(/&(?=[0-9a-fk-or])/g);
-        
-        // Handle text before first code
-        if(parts[0]) html += `<span>${parts[0]}</span>`;
-
-        for (let i = 1; i < parts.length; i++) {
-            const code = parts[i][0];
-            const content = parts[i].substring(1);
-            
-            if (mcColors[code]) { 
-                style.color = mcColors[code]; 
-                style.bold = style.italic = style.underline = style.strike = style.magic = false; 
-            }
-            else if (code === 'l') style.bold = true;
-            else if (code === 'o') style.italic = true;
-            else if (code === 'n') style.underline = true;
-            else if (code === 'm') style.strike = true;
-            else if (code === 'k') style.magic = true;
-            else if (code === 'r') { 
-                style.color = '#ffffff'; 
-                style.bold = style.italic = style.underline = style.strike = style.magic = false; 
-            }
-            
-            let renderColor = style.color;
-            if(renderColor === '#000') renderColor = '#222';
-
-            const classes = [
-                style.bold ? 'mc-bold' : '',
-                style.italic ? 'mc-italic' : '',
-                style.underline ? 'mc-underline' : '',
-                style.strike ? 'mc-strike' : '',
-                style.magic ? 'mc-magic' : ''
-            ].join(' ');
-
-            let finalContent = content;
-            if(style.magic) finalContent = content.replace(/./g, () => String.fromCharCode(33 + Math.random() * 94));
-
-            html += `<span style="color:${renderColor}" class="${classes}">${finalContent}</span>`;
-        }
-        preview.innerHTML = html || "<span style='opacity:0.4'>Type something...</span>";
-    }
-
-    // PRESETS
-    let myPresets = JSON.parse(localStorage.getItem('bilong_v5')) || [];
-
-    function saveNew() {
-        const name = document.getElementById('preset-name').value.trim();
-        if (!name || !input.value) return alert("Enter name and text!");
-        myPresets.push({ id: Date.now(), name, content: input.value });
-        finishAction();
-    }
-
-    function render() {
-        presetsList.innerHTML = '';
-        myPresets.forEach(p => {
-            const div = document.createElement('div');
-            div.className = 'preset-pill';
-            div.innerHTML = `
-                <button class="preset-load" onclick="loadP(${p.id})">${p.name}</button>
-                <div class="dots-btn" onclick="toggleM(event, ${p.id})">⋮</div>
-                <div id="m-${p.id}" class="menu">
-                    <button onclick="updateP(${p.id})">💾 Overwrite</button>
-                    <button onclick="renameP(${p.id})">✏️ Rename</button>
-                    <button style="color:#be5858" onclick="deleteP(${p.id})">🗑 Delete</button>
-                </div>
-            `;
-            presetsList.appendChild(div);
-        });
-    }
-
-    function loadP(id) { const p = myPresets.find(x => x.id == id); input.value = p.content; update(); }
-    function updateP(id) {
-        const p = myPresets.find(x => x.id == id);
-        if(confirm(`Update "${p.name}"?`)) { p.content = input.value; finishAction(); }
-    }
-    function deleteP(id) { if(confirm("Delete preset?")) { myPresets = myPresets.filter(x => x.id != id); finishAction(); } }
-    function renameP(id) {
-        const p = myPresets.find(x => x.id == id);
-        const n = prompt("New name:", p.name);
-        if(n) { p.name = n; finishAction(); }
-    }
-    function finishAction() {
-        localStorage.setItem('bilong_v5', JSON.stringify(myPresets));
-        document.getElementById('preset-name').value = '';
-        render();
-    }
-    function toggleM(e, id) {
-        e.stopPropagation();
-        document.querySelectorAll('.menu').forEach(m => { if(m.id !== 'm-'+id) m.style.display = 'none'; });
-        const m = document.getElementById('m-'+id);
-        m.style.display = m.style.display === 'block' ? 'none' : 'block';
-    }
-    document.onclick = () => document.querySelectorAll('.menu').forEach(m => m.style.display = 'none');
-
-    async function copyText() {
-        await navigator.clipboard.writeText(input.value);
-        const b = document.querySelector('.copy-main');
-        b.innerText = "✅ COPIED TO CLIPBOARD!";
-        setTimeout(() => b.innerText = "📋 COPY TO CLIPBOARD", 2000);
-    }
-
-    // Interval for Magic effect
-    setInterval(() => { if(input.value.includes('&k')) update(); }, 100);
-
-    input.oninput = update;
-    render();
-    update();
-</script>
+    <script src="app.js"></script>
 
 </body>
 </html>
