@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Minecraftia';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Minecraftia'), url('./Minecraftia.woff') format('woff');
+}
+
 :root {
     --gui-bg: #C6C6C6;
     --gui-border-light: #FFFFFF;
