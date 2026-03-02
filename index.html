@@ -4,77 +4,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bilong Tool Pro v5.0 - Ultimate Formatter</title>
+    <title>Minecraft Chat Formatter</title>
+    <meta name="description"
+        content="Generate and format Minecraft color codes and hex colors easily. The ultimate chat formatter and essential server tools for customizing your text in-game.">
 
-    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+    <meta property="og:title" content="Minecraft Chat Formatter">
+    <meta property="og:description"
+        content="Generate and format Minecraft color codes and hex colors easily. The ultimate chat formatter and essential server tools for customizing your text in-game.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bilongtoolpro.com/">
+    <meta property="og:image" content="https://bilongtoolpro.com/og-image.jpg">
+
+    <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="wrapper">
+    <main class="wrapper">
         <div class="inner-content">
             <header>
-                <h1>🛠 BILONG TOOL PRO v5 🛠</h1>
+                <h1>🛠 MINECRAFT CHAT FORMATTER 🛠</h1>
             </header>
 
-            <textarea id="input" placeholder="Enter your message..."></textarea>
+            <section aria-labelledby="tool-heading">
+                <h2 id="tool-heading" style="display:none;">Minecraft Text Formatter</h2>
+                <textarea id="input" placeholder="Enter your message..."
+                    aria-label="Enter your Minecraft message here"></textarea>
 
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
-                <div>
-                    <span class="section-label">Colors (0-f)</span>
-                    <div class="color-grid" id="color-grid"></div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                    <section aria-label="Color Selection">
+                        <span class="section-label">Colors (0-f)</span>
+                        <div class="color-grid" id="color-grid" aria-label="Minecraft Colors Grid"></div>
+                    </section>
+                    <section aria-label="Format Selection">
+                        <span class="section-label">Formats (l, o, n, m, k, r)</span>
+
+                        <div class="toolbar" aria-label="Text Formatting Tools">
+                            <button class="btn" onclick="add('&l')" title="Bold"
+                                aria-label="Format Bold"><b>B</b></button>
+                            <button class="btn" onclick="add('&o')" title="Italic"
+                                aria-label="Format Italic"><i>I</i></button>
+                            <button class="btn" onclick="add('&n')" title="Underline"
+                                aria-label="Format Underline"><u>U</u></button>
+                            <button class="btn" onclick="add('&m')" title="Strikethrough"
+                                aria-label="Format Strikethrough"><strike>S</strike></button>
+                            <button class="btn" onclick="add('&k')" title="Magic"
+                                aria-label="Format Magic (Obfuscated)">Magic</button>
+                            <button class="btn btn-clr" onclick="add('&r')" title="Reset"
+                                aria-label="Reset Formatting">Reset</button>
+                        </div>
+
+                        <span class="section-label">Extra Symbols</span>
+
+                        <div class="toolbar" aria-label="Extra Symbols">
+                            <button class="btn" onclick="add('⚠')" aria-label="Add Warning Symbol">⚠</button>
+                            <button class="btn" onclick="add('»')" aria-label="Add Right Double Angle Quote">»</button>
+                            <button class="btn" onclick="add('«')" aria-label="Add Left Double Angle Quote">«</button>
+                            <button class="btn" onclick="add('┃')" aria-label="Add Thick Vertical Bar">┃</button>
+                            <button class="btn" onclick="add('❤')" aria-label="Add Heart Symbol">❤</button>
+                            <button class="btn" onclick="add('★')" aria-label="Add Star Symbol">★</button>
+                            <button class="btn" onclick="add('✦')" aria-label="Add Star Sparkle Symbol">✦</button>
+                            <button class="btn" onclick="add('➔')" aria-label="Add Right Arrow Symbol">➔</button>
+                            <button class="btn" onclick="add('⬆')" aria-label="Add Up Arrow Symbol">⬆</button>
+                            <button class="btn" onclick="add('█')" aria-label="Add Full Block Symbol">█</button>
+                            <button class="btn" onclick="add('░')" aria-label="Add Light Shade Symbol">░</button>
+                        </div>
+                    </section>
                 </div>
-                <div>
-                    <span class="section-label">Formats (l, o, n, m, k, r)</span>
 
-                    <div class="toolbar">
-                        <button class="btn" onclick="add('&l')" title="Bold"><b>B</b></button>
-                        <button class="btn" onclick="add('&o')" title="Italic"><i>I</i></button>
-                        <button class="btn" onclick="add('&n')" title="Underline"><u>U</u></button>
-                        <button class="btn" onclick="add('&m')" title="Strikethrough"><strike>S</strike></button>
-                        <button class="btn" onclick="add('&k')" title="Magic">Magic</button>
-                        <button class="btn btn-clr" onclick="add('&r')" title="Reset">Reset</button>
+                <section aria-label="Preview and Output">
+                    <span class="section-label">Live Chat Preview</span>
+
+                    <div class="preview-box" aria-live="polite">
+                        <div id="preview"></div>
                     </div>
 
-                    <span class="section-label">Extra Symbols</span>
+                    <button class="btn copy-main" onclick="copyText()" aria-label="Copy formatted text to clipboard">📋
+                        COPY TO CLIPBOARD</button>
+                </section>
 
-                    <div class="toolbar">
-                        <button class="btn" onclick="add('⚠')">⚠</button>
-                        <button class="btn" onclick="add('»')">»</button>
-                        <button class="btn" onclick="add('«')">«</button>
-                        <button class="btn" onclick="add('┃')">┃</button>
-                        <button class="btn" onclick="add('❤')">❤</button>
-                        <button class="btn" onclick="add('★')">★</button>
-                        <button class="btn" onclick="add('✦')">✦</button>
-                        <button class="btn" onclick="add('➔')">➔</button>
-                        <button class="btn" onclick="add('⬆')">⬆</button>
-                        <button class="btn" onclick="add('█')">█</button>
-                        <button class="btn" onclick="add('░')">░</button>
+                <section aria-label="Presets Management">
+                    <span class="section-label">Save Current as New Preset</span>
+
+                    <div class="save-bar">
+                        <input type="text" id="preset-name" placeholder="Preset name..." aria-label="Preset name">
+                        <button class="btn btn-save" onclick="saveNew()" aria-label="Save Preset">SAVE</button>
                     </div>
-                </div>
-            </div>
 
-            <span class="section-label">Live Chat Preview</span>
+                    <span class="section-label">Your Saved Templates</span>
 
-            <div class="preview-box">
-                <div id="preview"></div>
-            </div>
+                    <div id="presets-list" class="presets-list" aria-label="Saved Presets List"></div>
+                </section>
+            </section>
 
-            <button class="btn copy-main" onclick="copyText()">📋 COPY TO CLIPBOARD</button>
-
-            <span class="section-label">Save Current as New Preset</span>
-
-            <div class="save-bar">
-                <input type="text" id="preset-name" placeholder="Preset name...">
-                <button class="btn btn-save" onclick="saveNew()">SAVE</button>
-            </div>
-
-            <span class="section-label">Your Saved Templates</span>
-
-            <div id="presets-list" class="presets-list"></div>
+            <article class="seo-guide"
+                style="margin-top: 40px; text-align: left; padding: 20px; background: rgba(0,0,0,0.15); border-radius: 8px;">
+                <h2 style="font-size: 1.2rem; margin-bottom: 15px;">How to Use Minecraft Color Codes & Hex Colors</h2>
+                <p style="margin-bottom: 10px; line-height: 1.5;">Welcome to our <strong>chat formatter</strong>!
+                    Enhancing your server's chat, signs, and MOTD is easy with <strong>Minecraft color codes</strong>.
+                    By simply using the ampersand (<code>&amp;</code>) followed by a specific character (like
+                    <code>a-f</code> or <code>0-9</code>), you can bring vibrant shades to your text.
+                </p>
+                <p style="margin-bottom: 10px; line-height: 1.5;">Modern Minecraft also supports custom <strong>hex
+                        colors</strong> (e.g., <code>&amp;#FF5555</code>), allowing you to pick millions of distinct
+                    color combinations. Use this tool to visualize and generate the exact combinations before putting
+                    them in-game.</p>
+                <p style="line-height: 1.5;">Our generator is one of the top <strong>server tools</strong> for admins
+                    and players who want to elevate their messaging style. Just type your message, apply the colors, and
+                    click copy!</p>
+            </article>
         </div>
-    </div>
+    </main>
 
     <footer>&copy; 2024 Bilong Tool | Authentic Minecraft Experience</footer>
 
