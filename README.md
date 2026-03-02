@@ -1,8 +1,8 @@
-# Bilong Tool Pro v5.0
+# Minecraft Chat Formatter
 
 ### The Ultimate Minecraft Text Formatter
 
-Bilong Tool Pro is a lightweight, web-based utility designed for server administrators, developers, and players who want to master Minecraft’s text formatting system. Built with a retro GUI aesthetic that mirrors the authentic game experience, it allows you to create complex, colorful, and styled strings for chat, signs, MOTDs, and plugin configurations.
+Minecraft Chat Formatter is a lightweight, web-based utility designed for server administrators, developers, and players who want to master Minecraft’s text formatting system. Built with a retro GUI aesthetic that mirrors the authentic game experience, it allows you to create complex, colorful, and styled strings for chat, signs, MOTDs, and plugin configurations.
 
 ---
 
@@ -32,7 +32,6 @@ Bilong Tool Pro is a lightweight, web-based utility designed for server administ
 
 ## 🛠 Technical Details
 
-* **Architecture:** Single-file application (HTML5, CSS3, Vanilla JavaScript).
 * **Persistence:** Uses `localStorage` to keep your presets safe even after closing the tab.
 * **Styling:** Custom CSS implementing a pixelated GUI system with CSS animations for the `&k` magic effect.
 * **Zero Dependencies:** No frameworks or external libraries required (uses Google Fonts for the Minecraftia typeface).
@@ -41,10 +40,8 @@ Bilong Tool Pro is a lightweight, web-based utility designed for server administ
 
 ## 📜 Credits & License
 
-* **Created by:** Bilong
+* **Created by:** Bealang
 * **Vibe:** 100% Authentic Minecraft Experience
 
 > [!TIP]
 > This tool is perfect for creating eye-catching **Server MOTDs** or complex **EssentialsX** join messages!
-
-Would you like me to add a section on how to host this on GitHub Pages?
